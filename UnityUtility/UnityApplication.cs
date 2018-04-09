@@ -36,6 +36,24 @@ namespace UnityUtility
         }
 
         /// <summary>
+        /// 获取对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="inputName"></param>
+        /// <returns></returns>
+        public T Reslove<T>(string inputName = null)
+        {
+            if (string.IsNullOrWhiteSpace(inputName))
+            {
+                return (T)CoreUnityContainer.Resolve(typeof(T));
+            }
+            else
+            {
+                return (T)CoreUnityContainer.Resolve(typeof(T),inputName);
+            }    
+        }
+
+        /// <summary>
         /// 私有构造方法
         /// </summary>
         private UnityApplication()

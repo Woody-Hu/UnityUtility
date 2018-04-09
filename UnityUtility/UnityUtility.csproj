@@ -112,8 +112,11 @@
     <Compile Include="CompentAttribute.cs" />
     <Compile Include="CoreAssemblyServiceImp.cs" />
     <Compile Include="CoreTypeServiceImp.cs" />
+    <Compile Include="ExceptionAopAttribute.cs" />
+    <Compile Include="ExceptionHandler.cs" />
     <Compile Include="ICoreTypeService.cs" />
     <Compile Include="ICoreAssemblyService.cs" />
+    <Compile Include="InterfaceAOPAttribute.cs" />
     <Compile Include="ServiceProxy.cs" />
     <Compile Include="ServiceProxyFactory.cs" />
     <Compile Include="UnityApplication.cs" />

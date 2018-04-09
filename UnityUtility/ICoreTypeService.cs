@@ -24,5 +24,11 @@ namespace UnityUtility
         /// <param name="oneType"></param>
         /// <param name="useAttribute"></param>
         void RegistOneTypeByInterface(Type oneType, CompentAttribute useAttribute);
+
+        /// <summary>
+        /// 注册一个AOP用接口
+        /// </summary>
+        /// <param name="inputType"></param>
+        void RefistOneAOPInterface(Type inputType);
     }
 }

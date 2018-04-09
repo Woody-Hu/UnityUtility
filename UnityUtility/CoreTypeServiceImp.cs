@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
+using Unity.Interception.ContainerIntegration;
+using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;
 
 namespace UnityUtility
 {
@@ -21,6 +23,8 @@ namespace UnityUtility
         {
             //初始化
             m_useContainer = new UnityContainer();
+            //标记扩展
+            m_useContainer.AddNewExtension<Interception>();
         }
 
         /// <summary>
@@ -95,6 +99,16 @@ namespace UnityUtility
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 注册一个AOP切面接口
+        /// </summary>
+        /// <param name="inputType"></param>
+        public void RefistOneAOPInterface(Type inputType)
+        {
+            m_useContainer.Configure<Interception>().SetInterceptorFor(inputType, new InterfaceInterceptor());
+
         }
     }
 }

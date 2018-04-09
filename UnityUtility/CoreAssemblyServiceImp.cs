@@ -24,6 +24,11 @@ namespace UnityUtility
         private static Type m_compentType = typeof(CompentAttribute);
 
         /// <summary>
+        /// 接口AOP标记特性
+        /// </summary>
+        private static Type m_useAopInterfaceType = typeof(InterfaceAOPAttribute);
+
+        /// <summary>
         /// 使用的容器
         /// </summary>
         public UnityContainer UseContainer
@@ -46,11 +51,27 @@ namespace UnityUtility
         /// <param name="inputAssembly"></param>
         public void RegistOneAssembly(Assembly inputAssembly)
         {
+            //待AOP的interface列表
+            List<Type> lstAopInterfaceType = new List<Type>();
+
             //全类型检查
             foreach (var oneType in inputAssembly.GetTypes())
             {
-                //接口,抽象，无法继承跳过
-                if (oneType.IsInterface || oneType.IsAbstract || oneType.IsSealed)
+                //无法继承跳过
+                if (oneType.IsSealed)
+                {
+                    continue;
+                }
+
+                //若是标记的待使用的Interface
+                //需要Public接口
+                if (oneType.IsInterface && oneType.IsPublic && null != oneType.GetCustomAttribute(m_useAopInterfaceType))
+                {
+                    lstAopInterfaceType.Add(oneType);
+                }
+
+                //接口 抽象跳过
+                if (oneType.IsAbstract)
                 {
                     continue;
                 }
@@ -74,6 +95,12 @@ namespace UnityUtility
                     m_useTypeService.RegistOneTypeByInterface(oneType, useAttribute);
                 }
 
+            }
+
+            //注册AOP切面
+            foreach (var oneType in lstAopInterfaceType)
+            {
+                m_useTypeService.RefistOneAOPInterface(oneType);
             }
         }
     }
