@@ -18,25 +18,5 @@ namespace TestConsole
         }
     }
 
-  
-    [InterfaceAOP]
-    public interface IA
-    {
-        [ExceptionAop]
-        string Test();
-    }
-
-    [Compent(RegistByClass = false)]
-    public class A : IA
-    {
-        public string Test()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
-
-
 
 }

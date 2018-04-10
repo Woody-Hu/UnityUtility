@@ -16,7 +16,7 @@ namespace UnityUtility
     {
         public override ICallHandler CreateHandler(IUnityContainer container)
         {
-            throw new NotImplementedException();
+            return new EFTransactionHandler();
         }
     }
 }
