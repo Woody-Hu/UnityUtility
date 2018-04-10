@@ -9,12 +9,14 @@ using Unity.Interception.PolicyInjection.Policies;
 
 namespace UnityUtility
 {
-    [AttributeUsage(AttributeTargets.Method,AllowMultiple = false,Inherited = false)]
-    public class ExceptionAopAttribute : HandlerAttribute
+    /// <summary>
+    /// EF事务操作
+    /// </summary>
+    class EFTransactionAttribute : HandlerAttribute
     {
         public override ICallHandler CreateHandler(IUnityContainer container)
         {
-            return new ExceptionHandler();
+            throw new NotImplementedException();
         }
     }
 }

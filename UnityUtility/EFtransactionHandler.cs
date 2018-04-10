@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using Unity.Interception.PolicyInjection.Pipeline;
 
 namespace UnityUtility
 {
     /// <summary>
-    /// 异常AOP机制
+    /// EF事务处理AOP
     /// </summary>
-    internal class ExceptionHandler : ICallHandler
+    internal class EFTransactionHandler : ICallHandler
     {
         private int m_useOrder;
-
-        private StringBuilder m_useStringBuilder = new StringBuilder();
 
         public int Order
         {
@@ -32,27 +31,20 @@ namespace UnityUtility
         public IMethodReturn Invoke(IMethodInvocation input, GetNextHandlerDelegate getNext)
         {
             IMethodReturn returnValue = null;
-            try
+            using (TransactionScope useScope = new TransactionScope())
             {
-                m_useStringBuilder.AppendLine(input.MethodBase.Name);
                 returnValue = getNext()(input, getNext);
-                if (returnValue.Exception != null)
+                //若没有异常则提交事务
+                if (null == returnValue.Exception)
                 {
-                    m_useStringBuilder.AppendLine(returnValue.Exception.Message);
-                    //清空异常
-                    returnValue.Exception = null;
+                    useScope.Complete();
                 }
                 else
                 {
-                    m_useStringBuilder.AppendLine(input.MethodBase.Name + "Finish");
+                    //清空异常
+                    returnValue.Exception = null;
                 }
             }
-            catch (Exception)
-            {
-;
-            }
-           
-
             return returnValue;
         }
     }
