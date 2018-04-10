@@ -56,12 +56,22 @@ namespace UnityUtility
         /// <summary>
         /// 私有构造方法
         /// </summary>
-        private UnityApplication()
+        private UnityApplication(HashSet<ObjectIOCTypeInfo> lstInputIocInfo = null)
         {
             m_useAssemblyService = ServiceProxyFactory.CreatProxy<ICoreAssemblyService>(new CoreAssemblyServiceImp());
-            
+
+            var useTypeService = m_useAssemblyService.UseTypeServie;
+
             //获取所有程序集
             var aLLAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            if (null != lstInputIocInfo)
+            {
+                foreach (var oneInfo in lstInputIocInfo)
+                {
+                    useTypeService.RegistOneObjectInfo(oneInfo);
+                }
+            }
 
             foreach (var oneAssemblies in aLLAssemblies)
             {
@@ -74,12 +84,12 @@ namespace UnityUtility
         /// 获得应用程序
         /// </summary>
         /// <returns></returns>
-        public static UnityApplication GetApplication()
+        public static UnityApplication GetApplication(HashSet<ObjectIOCTypeInfo> lstInputIocInfo = null)
         {
             //利用上不会并发，不考虑双重锁
             if (null == m_singleTag)
             {
-                m_singleTag = new UnityApplication();
+                m_singleTag = new UnityApplication(lstInputIocInfo);
             }
 
             return m_singleTag;

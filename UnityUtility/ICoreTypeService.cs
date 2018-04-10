@@ -12,6 +12,12 @@ namespace UnityUtility
         UnityContainer UseContainer { get; }
 
         /// <summary>
+        /// 注册一个外部对象
+        /// </summary>
+        /// <param name="inputInfo"></param>
+        void RegistOneObjectInfo(ObjectIOCTypeInfo inputInfo);
+
+        /// <summary>
         /// 利用类型注册一个类型
         /// </summary>
         /// <param name="oneType"></param>

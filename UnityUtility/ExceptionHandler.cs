@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Unity.Interception.PolicyInjection.Pipeline;
@@ -13,8 +14,6 @@ namespace UnityUtility
     internal class ExceptionHandler : ICallHandler
     {
         private int m_useOrder;
-
-        private StringBuilder m_useStringBuilder = new StringBuilder();
 
         public int Order
         {
@@ -32,25 +31,28 @@ namespace UnityUtility
         public IMethodReturn Invoke(IMethodInvocation input, GetNextHandlerDelegate getNext)
         {
             IMethodReturn returnValue = null;
-            try
+
+            //顺序执行
+            returnValue = getNext()(input, getNext);
+
+            //若符合要求
+            if (input.MethodBase is MethodInfo && (input.MethodBase as MethodInfo).ReturnType == typeof(bool))
             {
-                m_useStringBuilder.AppendLine(input.MethodBase.Name);
-                returnValue = getNext()(input, getNext);
+                //若有异常
                 if (returnValue.Exception != null)
                 {
-                    m_useStringBuilder.AppendLine(returnValue.Exception.Message);
                     //清空异常
                     returnValue.Exception = null;
+                    //设置返回值
+                    returnValue.ReturnValue = false;
                 }
                 else
                 {
-                    m_useStringBuilder.AppendLine(input.MethodBase.Name + "Finish");
+                    returnValue.ReturnValue = false;
                 }
             }
-            catch (Exception)
-            {
-;
-            }
+
+           
            
 
             return returnValue;

@@ -38,6 +38,29 @@ namespace UnityUtility
             }
         }
 
+        /// <summary>
+        /// 注册一个外部对象
+        /// </summary>
+        /// <param name="inputInfo"></param>
+        public void RegistOneObjectInfo(ObjectIOCTypeInfo inputInfo)
+        {
+            if (null == inputInfo)
+            {
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(inputInfo.UseName))
+            {
+                m_useContainer.RegisterInstance(inputInfo.UseType, inputInfo.UseObject);
+            }
+            else
+            {
+                m_useContainer.RegisterInstance(inputInfo.UseType, inputInfo.UseName, inputInfo.UseObject);
+
+            }
+        }
+
+
         public void RegistOneTypeByClass(Type oneType, CompentAttribute useAttribute)
         {
             //若是单例

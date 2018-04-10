@@ -122,6 +122,7 @@
     <Compile Include="InterfaceAOPAttribute.cs" />
     <Compile Include="ServiceProxy.cs" />
     <Compile Include="ServiceProxyFactory.cs" />
+    <Compile Include="ObjectIOCTypeInfo.cs" />
     <Compile Include="UnityApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

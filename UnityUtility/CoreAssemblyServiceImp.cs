@@ -39,6 +39,17 @@ namespace UnityUtility
             }
         }
 
+        /// <summary>
+        /// 获取使用的类型服务
+        /// </summary>
+        public ICoreTypeService UseTypeServie
+        {
+            get
+            {
+                return m_useTypeService;
+            }
+        }
+
         internal CoreAssemblyServiceImp()
         {
             //初始化

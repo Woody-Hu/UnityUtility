@@ -19,6 +19,11 @@ namespace UnityUtility
         UnityContainer UseContainer { get; }
 
         /// <summary>
+        /// 使用的类型服务
+        /// </summary>
+        ICoreTypeService UseTypeServie { get; }
+
+        /// <summary>
         /// 注册一个程序集
         /// </summary>
         /// <param name="inputAssembly"></param>
