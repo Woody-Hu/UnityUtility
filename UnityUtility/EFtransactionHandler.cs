@@ -16,6 +16,11 @@ namespace UnityUtility
     {
         private int m_useOrder;
 
+        /// <summary>
+        /// 使用的事务选项
+        /// </summary>
+        private TransactionOptions m_useTrancsactionOptions = new TransactionOptions() { IsolationLevel = IsolationLevel.ReadCommitted };
+
         public int Order
         {
             get
@@ -38,7 +43,7 @@ namespace UnityUtility
             if (input.MethodBase is MethodInfo && (input.MethodBase as MethodInfo).ReturnType == typeof(bool))
             {
                 //开启事务
-                using (TransactionScope useScope = new TransactionScope())
+                using (TransactionScope useScope = new TransactionScope( TransactionScopeOption.RequiresNew , m_useTrancsactionOptions))
                 {
                     returnValue = getNext()(input, getNext);
                     //若没有异常则提交事务
