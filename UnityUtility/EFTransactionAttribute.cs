@@ -16,7 +16,15 @@ namespace UnityUtility
     {
         public override ICallHandler CreateHandler(IUnityContainer container)
         {
-            return new EFTransactionHandler();
+            return Singleton.UseSingleTonHandler;
+        }
+
+        /// <summary>
+        /// 单例模式懒加载
+        /// </summary>
+        private class Singleton
+        {
+            internal readonly static ICallHandler UseSingleTonHandler = new EFTransactionHandler();
         }
     }
 }
