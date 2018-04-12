@@ -12,7 +12,7 @@ namespace UnityUtility
     /// <summary>
     /// EF事务处理AOP
     /// </summary>
-    internal class EFTransactionHandler : ICallHandler
+    internal class EFTransactionScopeHandler : ICallHandler
     {
         private int m_useOrder;
 

@@ -114,7 +114,7 @@
     <Compile Include="CoreAssemblyServiceImp.cs" />
     <Compile Include="CoreTypeServiceImp.cs" />
     <Compile Include="EFTransactionAttribute.cs" />
-    <Compile Include="EFTransactionHandler.cs" />
+    <Compile Include="EFTransactionScopeHandler.cs" />
     <Compile Include="ExceptionAopAttribute.cs" />
     <Compile Include="ExceptionHandler.cs" />
     <Compile Include="ICoreTypeService.cs" />

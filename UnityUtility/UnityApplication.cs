@@ -86,10 +86,16 @@ namespace UnityUtility
         /// <returns></returns>
         public static UnityApplication GetApplication(HashSet<ObjectIOCTypeInfo> lstInputIocInfo = null)
         {
-            //利用上不会并发，不考虑双重锁
             if (null == m_singleTag)
             {
-                m_singleTag = new UnityApplication(lstInputIocInfo);
+                //双重检查锁
+                lock (typeof(UnityApplication))
+                {
+                    if (null == m_singleTag)
+                    {
+                        m_singleTag = new UnityApplication(lstInputIocInfo);
+                    }
+                } 
             }
 
             return m_singleTag;

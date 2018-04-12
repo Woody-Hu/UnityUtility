@@ -24,7 +24,7 @@ namespace UnityUtility
         /// </summary>
         private class Singleton
         {
-            internal readonly static ICallHandler UseSingleTonHandler = new EFTransactionHandler();
+            internal readonly static ICallHandler UseSingleTonHandler = new EFTransactionScopeHandler();
         }
     }
 }
