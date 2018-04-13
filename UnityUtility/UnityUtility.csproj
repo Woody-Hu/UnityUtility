@@ -113,6 +113,7 @@
     <Compile Include="CompentAttribute.cs" />
     <Compile Include="CoreAssemblyServiceImp.cs" />
     <Compile Include="CoreTypeServiceImp.cs" />
+    <Compile Include="CustomMethodReturn.cs" />
     <Compile Include="EFTransactionAttribute.cs" />
     <Compile Include="EFTransactionScopeHandler.cs" />
     <Compile Include="ExceptionAopAttribute.cs" />

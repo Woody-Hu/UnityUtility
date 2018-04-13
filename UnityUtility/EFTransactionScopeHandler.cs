@@ -55,11 +55,13 @@ namespace UnityUtility
                     }
                     else
                     {
-                        //清空异常
-                        returnValue.Exception = null;
                         //设置返回值
                         returnValue.ReturnValue = false;
                     }
+
+                    //设置返回值类型
+                    returnValue = CustomMethodReturn.PrepareCustomReturn(input, returnValue);
+
                 }
             }
             //正常执行
