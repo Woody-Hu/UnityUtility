@@ -110,6 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeanAttribute.cs" />
+    <Compile Include="BeanScanAttribute.cs" />
     <Compile Include="CompentAttribute.cs" />
     <Compile Include="CoreAssemblyServiceImp.cs" />
     <Compile Include="CoreTypeServiceImp.cs" />
